@@ -83,7 +83,7 @@ def authz_cb(request):
 
     try:
         query = parse_qs(request.META['QUERY_STRING'])
-        userinfo = client.callback(query, request.session)
+        userinfo = client.callback(query, request.session).encode('utf8')
         request.session["userinfo"] = userinfo
         user = authenticate(**userinfo)
         if user:
